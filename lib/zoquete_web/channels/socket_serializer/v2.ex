@@ -10,7 +10,7 @@ defmodule ZoqueteWeb.SocketSerializer.V2 do
   Translates a `Phoenix.Socket.Broadcast` into a `Phoenix.Socket.Message`.
   """
   def fastlane!(%Broadcast{} = msg) do
-    data = Poison.encode_to_iodata!([nil, nil, msg.topic, msg.event, msg.payload])
+    data = Poison.encode_to_iodata!([nil, nil, msg.topic, msg.event, Transformer.transform(msg.payload, Transformer.PascalCase)])
     {:socket_push, :text, data}
   end
 
