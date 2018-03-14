@@ -37,7 +37,8 @@ defmodule Zoquete.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:accent, github: "hopsor/accent", branch: "upgrade-elixir-and-plug-support"}
     ]
   end
 end
