@@ -1,12 +1,21 @@
 defmodule ZoqueteWeb.UserSocket do
   use Phoenix.Socket
 
+  alias ZoqueteWeb.SocketSerializer
+
   ## Channels
   channel "room:lobby", ZoqueteWeb.RoomChannel
 
   ## Transports
-  transport :websocket, Phoenix.Transports.WebSocket
-
+  transport(
+    :websocket,
+    Phoenix.Transports.WebSocket,
+    serializer: [
+      {SocketSerializer.V1, "~> 1.0.0"},
+      {SocketSerializer.V2, "~> 2.0.0"}
+    ]
+  )
+  
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
   # verification, you can put default assigns into
