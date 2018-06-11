@@ -6,7 +6,6 @@ defmodule ZoqueteWeb.SocketSerializer.V1 do
   alias Phoenix.Socket.Reply
   alias Phoenix.Socket.Message
   alias Phoenix.Socket.Broadcast
-  alias Accent.Transformer
 
   @doc """
   Translates a `Phoenix.Socket.Broadcast` into a `Phoenix.Socket.Message`.
@@ -27,7 +26,7 @@ defmodule ZoqueteWeb.SocketSerializer.V1 do
       ref: reply.ref,
       payload: %{
         status: reply.status,
-        response: Transformer.transform(reply.payload, Transformer.PascalCase)
+        response: ProperCase.to_camel_case(reply.payload)
       }
     }
 
@@ -45,13 +44,13 @@ defmodule ZoqueteWeb.SocketSerializer.V1 do
     message
     |> Poison.decode!()
     |> Phoenix.Socket.Message.from_map!()
-    |> Map.update(:payload, %{}, &Transformer.transform(&1, Transformer.SnakeCase))
+    |> Map.update(:payload, %{}, &ProperCase.to_snake_case(&1))
   end
 
   defp encode_v1_fields_only(%Message{} = msg) do
     msg
     |> Map.take([:topic, :event, :payload, :ref])
-    |> Map.update(:payload, %{}, &Transformer.transform(&1, Transformer.PascalCase))
+    |> Map.update(:payload, %{}, &ProperCase.to_camel_case(&1))
     |> Poison.encode_to_iodata!()
   end
 end

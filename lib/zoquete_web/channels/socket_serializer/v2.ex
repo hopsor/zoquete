@@ -4,7 +4,6 @@ defmodule ZoqueteWeb.SocketSerializer.V2 do
   @behaviour Phoenix.Transports.Serializer
 
   alias Phoenix.Socket.{Reply, Message, Broadcast}
-  alias Accent.Transformer
 
   @doc """
   Translates a `Phoenix.Socket.Broadcast` into a `Phoenix.Socket.Message`.
@@ -16,7 +15,7 @@ defmodule ZoqueteWeb.SocketSerializer.V2 do
         nil,
         msg.topic,
         msg.event,
-        Transformer.transform(msg.payload, Transformer.PascalCase)
+        ProperCase.to_camel_case(msg.payload)
       ])
 
     {:socket_push, :text, data}
@@ -33,7 +32,7 @@ defmodule ZoqueteWeb.SocketSerializer.V2 do
       "phx_reply",
       %{
         status: reply.status,
-        response: Transformer.transform(reply.payload, Transformer.PascalCase)
+        response: ProperCase.to_camel_case(reply.payload)
       }
     ]
 
@@ -46,7 +45,7 @@ defmodule ZoqueteWeb.SocketSerializer.V2 do
       msg.ref,
       msg.topic,
       msg.event,
-      Transformer.transform(msg.payload, Transformer.PascalCase)
+      ProperCase.to_camel_case(msg.payload)
     ]
 
     {:socket_push, :text, Poison.encode_to_iodata!(data)}
@@ -61,7 +60,7 @@ defmodule ZoqueteWeb.SocketSerializer.V2 do
     %Phoenix.Socket.Message{
       topic: topic,
       event: event,
-      payload: Transformer.transform(payload, Transformer.SnakeCase),
+      payload: ProperCase.to_snake_case(payload),
       ref: ref,
       join_ref: join_ref
     }

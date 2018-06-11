@@ -11,5 +11,6 @@
   "phoenix_pubsub": {:hex, :phoenix_pubsub, "1.0.2", "bfa7fd52788b5eaa09cb51ff9fcad1d9edfeb68251add458523f839392f034c1", [:mix], [], "hexpm"},
   "plug": {:hex, :plug, "1.5.0", "224b25b4039bedc1eac149fb52ed456770b9678bbf0349cdd810460e1e09195b", [:mix], [{:cowboy, "~> 1.0.1 or ~> 1.1 or ~> 2.1", [hex: :cowboy, repo: "hexpm", optional: true]}, {:mime, "~> 1.0", [hex: :mime, repo: "hexpm", optional: false]}], "hexpm"},
   "poison": {:hex, :poison, "3.1.0", "d9eb636610e096f86f25d9a46f35a9facac35609a7591b3be3326e99a0484665", [:mix], [], "hexpm"},
+  "proper_case": {:hex, :proper_case, "1.2.0", "31e5b4c9f73b831a8e463b6ba514330a72850e083ee329f4c215bee3d81fb2cc", [:mix], [], "hexpm"},
   "ranch": {:hex, :ranch, "1.3.2", "e4965a144dc9fbe70e5c077c65e73c57165416a901bd02ea899cfd95aa890986", [:rebar3], [], "hexpm"},
 }
